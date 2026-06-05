@@ -53,6 +53,35 @@ npm run dev
 npm run build
 ```
 
+## Supabase セットアップ
+
+初期スキーマと RLS policy は次の SQL にまとめています。
+
+```text
+supabase/migrations/001_initial_schema.sql
+```
+
+Supabase Dashboard の SQL Editor で実行するか、Supabase CLI を使う場合はプロジェクトに合わせて migration として適用してください。
+
+この SQL で作成する主な要素:
+
+- `profiles`
+- `documents`
+- `document_members`
+- `document_role`
+- 新規 Auth ユーザー作成時に `profiles` を作る trigger
+- ドキュメント作成時に owner を `document_members` に追加する trigger
+- `documents.updated_at` を更新する trigger
+- `documents.owner_id` の変更を禁止する trigger
+- `owner / editor / viewer` に基づく RLS policy
+
+RLS の前提:
+
+- 未ログインユーザーはアプリデータにアクセスできません。
+- ドキュメントは owner または member だけが参照できます。
+- ドキュメント更新は owner または editor だけが実行できます。
+- ドキュメント削除とメンバー管理は owner だけが実行できます。
+
 ## 要件
 
 - マルチユーザーで利用できること

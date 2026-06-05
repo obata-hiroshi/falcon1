@@ -19,6 +19,40 @@ Cloudflare Pages
 Next.js よりも、まずは Vite + React で小さく作る方針です。
 サーバー側の複雑な処理を持たず、フロントエンドから Supabase を直接利用する構成にします。
 
+## 開発環境
+
+必要なもの:
+
+- Node.js 22 系
+- npm
+- Supabase プロジェクト
+
+初回セットアップ:
+
+```bash
+npm install
+cp .env.example .env
+```
+
+`.env` に Supabase の接続情報を設定します。
+
+```bash
+VITE_SUPABASE_URL=your-supabase-url
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+
+開発サーバー:
+
+```bash
+npm run dev
+```
+
+ビルド:
+
+```bash
+npm run build
+```
+
 ## 要件
 
 - マルチユーザーで利用できること
